@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <title>OXT</title>
 
-      <meta property="og:title" content="OXT" />
-<meta property="og:description" content="The OXT Portal" />
-<meta property="og:image" content="https://ohextee.com/IMG_0818.jpeg" />
-<meta property="og:url" content="https://ohextee.com" />
-<meta name="twitter:card" content="summary_large_image" />
-  
+  <!-- Social preview / iMessage card -->
+  <meta property="og:title" content="OXT" />
+  <meta property="og:description" content="The OXT Portal" />
+  <meta property="og:image" content="https://ohextee.com/IMG_0818.jpeg" />
+  <meta property="og:url" content="https://ohextee.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Lottie player -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
   <style>
@@ -36,11 +38,11 @@
       align-items: center;
     }
 
-    /* FORCE the animation to fill the canvas */
+    /* Make the animation itself huge */
     lottie-player {
       width: 100%;
       height: 100%;
-      transform: scale(1.6);       /* <–– INCREASE THIS TO MAKE IT EVEN LARGER */
+      transform: scale(1.8);      /* bump this up/down to taste */
       transform-origin: center;
     }
   </style>
