@@ -2,61 +2,649 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>OXT</title>
-
-  <!-- Social preview / iMessage card -->
-  <meta property="og:title" content="OXT" />
-  <meta property="og:description" content="The OXT Portal" />
-  <meta property="og:image" content="https://ohextee.com/IMG_0818.jpeg" />
-  <meta property="og:url" content="https://ohextee.com" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Lottie player -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEAS | OXT</title>
   <style>
-    html, body {
+    :root {
+      --bg: #000000;
+      --fg: #00ff41;
+      --pad: 80px;
+      --maxw: 850px;
+      --font: 1.3rem;
+      --line: 1.9;
+      --speed: 28; /* px per second (comfortable reading). tweak 22–34 */
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Courier New", Courier, monospace;
       margin: 0;
       padding: 0;
-      background: #000000;
-      height: 100%;
-      width: 100%;
+      overflow: hidden; /* keeps the viewport clean */
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* full-screen stage */
+    #terminal {
+      height: 100vh;
+      width: 100vw;
       overflow: hidden;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-start;
+      align-items: flex-start;
     }
 
-    /* Fullscreen container */
-    .full-screen-logo {
-      width: 100vmin;
-      height: 100vmin;
-      max-width: 100%;
-      max-height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Make the animation itself huge */
-    lottie-player {
+    /* scrolling text block */
+    #content {
+      white-space: pre-wrap;
+      text-align: left;
+      padding: var(--pad);
+      font-size: var(--font);
+      line-height: var(--line);
+      max-width: var(--maxw);
       width: 100%;
-      height: 100%;
-      transform: scale(1.8);      /* bump this up/down to taste */
-      transform-origin: center;
+      box-sizing: border-box;
+
+      /* IMPORTANT: allow selection/copy */
+      user-select: text;
+      cursor: text;
+
+      /* set by JS */
+      transform: translateY(var(--startY, 0px));
+      will-change: transform;
+    }
+
+    /* paused state: keep selection available */
+    #content.paused {
+      /* optional subtle pause styling */
+      color: #ffffff;
+      text-shadow: 0 0 15px #00ff41;
     }
   </style>
 </head>
-
 <body>
-  <div class="full-screen-logo">
-    <lottie-player
-      src="oxt-logo.json"
-      background="transparent"
-      speed="1"
-      autoplay
-      loop>
-    </lottie-player>
+  <div id="terminal">
+    <div id="content" aria-label="Scrolling text">
+IDEAS / free to use (no attribution needed)
+\ Tre 
+
+- EVERYONE WANTS TO BE COOL
+
+- BE STRANGE 
+
+- Michelangelo said he freed the form from stone. My experience building OXT from a sense of the shape of it, knocking up against my own history and seeing what it had always already been
+
+- The artist is a company. The artist must be convertible shares.  
+
+- YOU HAVE PERMISSION TO LAUGH AT THIS
+
+- You go to Drake for X. You go to XYZ for Y. You go to OXT for ______. 
+
+- Creation is a compulsion.
+
+- THE ARTIST IS A SYSTEM
+
+- MATCH ENERGY
+
+- SCALE ALIVENESS
+
+- Everything is pretend
+
+- I AM HUMBLED IN THE PRESENCE OF EVERYTHING ELSE 
+
+- Kim K clip, remixed: “Nobody wants to work anymore” after something related to the work of just being on the planet as a thing
+
+- Take care of people. 
+
+- “Where are all the new ideas?”
+
+- ANTI-ESCAPISM
+
+- There is nowhere to go
+
+- THE EXPERIMENT IS THE TRANSLATION OF TRUTH
+
+- NATURE'S HAD HER BILLIONS 
+
+- GO WHERE YOU AREN’T ALLOWED 🚪 
+
+- LEAVE IT WHERE YOU PICKED IT UP
+
+- nuclear bomb —-> CORN
+
+- THE DEAD ARE STILL BURYING THE DEAD 🔂
+
+- YOU ARE ALREADY PRIMED TO SEE
+
+- THE PRINCIPLE IS TRUTH - does it measure up?
+
+- THE AGE OF SURRENDER
+
+- The old world was built for old need. Don't get bit by the dummy zummy 🧟‍♂️
+
+- I HAD EVERY OPPORTUNITY NOT TO BE FREE, BUT HERE I AM
+
+- Perfect rhythm is alignment in placement. Noise is misalignment. 
+
+- MAY ALL GOOD THINGS BE SMALL AND MAY ALL HEAVY THINGS BE 💡 
+
+- I LIKE THE BLACK STONE THING IN ARRIVAL FOR AESTHETIC
+
+- I WAS SITTING AT HOME FOR A WHILE NOW I’M OUT
+
+- ACCEPT THE CONSTRAINT / THE INVITATION 
+
+- It’s time for something new. 
+
+- ‼️EVERYONE BELONGS
+
+- OXT IS A ROOM
+
+- In which greatness is an illusion
+
+- THE STRUCTURE IS AN INTERRUPTION
+
+- NO ONE TURNED AWAY AT THE ZIGGURAT 
+
+- An idea is the intersection between everything and all of us. 
+
+- EVERYTHING IS ART, THEREFORE EVERYTHING MUST BE ART
+
+- WHATS THE BIG IDEA HUH???
+
+- Art is the height of intention
+
+- AN IDEA IS NOT A COMMANDMENT 💡 
+
+- A COMMANDMENT IS AN IDEA 
+
+- FREEDOM AT SCALE
+
+- EVERYONE’S DOING THE BEST THEY CAN 🤷🏽‍♂️ 
+
+- YOU’RE ALREADY ADMIRING YOURSELF / SEE YOURSELF, TOO
+
+- THE AGE OF PLAY
+
+- EXPRESSION IS DIAGNOSTIC 🫂 
+
+- It doesn’t have to get worse. 
+
+- THE ARTIST IS A SYSTEM
+
+- My lab has been the mind : my power, the heart. 
+
+- IT IS WEARING YOUR LIFE
+
+- OPEN SOURCE THE THING
+
+- OPEN SOURCE ______
+
+- Headline : ‘SPIRITUAL PSYCHOSIS’
+
+- THE CAT’S OUT OF THE BAG 💰 
+
+- I’m just a nerd noticing the shape of things. 
+
+- IT IS IMPOSSIBLE TO LEAVE 🏠 
+
+- TOTAL TRUST IN YOURSELF IS SCARY
+
+- How can I break it?
+
+- NOTICING IS THE DISCIPLINE  👀 
+
+- MONEY IS AN APPRECIATION
+
+- I’m an artist whose medium happens to include business. 
+
+- SAVE SOME FOR THE REST OF US 🤣 
+
+- REMEMBER CLASS?
+
+- TURN A SHEEP INTO A 🧥 
+
+- YOU ARE INSIDE AN IDEA
+
+- IT'S GOOD TO BE WRONG
+
+- DO I RESPECT WORDS ENOUGH?
+
+- DESYNC
+
+- PERCEPTION IS RELATIONSHIP 
+
+- GROW UP
+
+- THE SYSTEM DOESNT KNOW YOU, BUT IT WILL
+
+- WE ARE STILL THE MILLENNIUM
+
+- THERE ARE SO MANY EXPECTATIONS 
+
+- OMG 
+
+- The condition is overwhelm. 
+
+- NOTHING TO DO, BUT EVERYTHING TO BE
+
+- FREE _________
+
+- FREE EVERYONE
+
+- EVERYONE’S AFRAID TO SAY HOW CRAZY THEY REALLY ARE
+
+- Translation can be faithful without being exact. 
+
+- SAY THE WORD 
+
+- UNCLE TRE 😁 
+
+- WAVE THE WHITE FLAG
+
+- THERE’S A BETTER WAY TO DO THIS
+
+- YOU AREN’T BETTER THAN ANYBODY, AND THAT’S GOOD
+
+- YOU’RE NOT CRAZY
+      
+- DON’T BE A SLEEPWALKER 
+
+- Everything is ritual. 
+
+- EVERYTHING IS CONVERGING
+
+- Design principle #1 : Blur the worlds. Break across different levels of scale. Refract ideas across vectors. Ziggurat is a company is an idea is a place is a callback is a dream
+
+- I’M DOING IT TOO 🤪
+
+- I’M ITS CENTER, NOT ITS FOCUS : WE ARE
+
+- HISTORY IS FRACTURING AGAIN
+
+- The future is here. Act accordingly. 
+
+- AT LEAST WE’RE HERE TOGETHER
+
+- NON-DUALITY THREATENS EVERYONE AT ONCE
+
+- You think reality is serious, so you can’t fit the silliness IN. 
+
+- NOW IT’S NOT A PRISON / IT’S MY HOME
+
+- EVERYTHING IS BECOMING 🧱
+
+- we are watching the human mind scale into coherence / the right brain and left brain debating over history? / it wasn’t a debate / instead, refinement / like one of those sand toys you had to shake as a kid before the picture was clear
+
+- WE ARE HERE TO COMMUNICATE
+
+- WITHSTAND THE CONTRADICTION 
+
+- BE THE CONTRADICTION
+
+- Have you organized your mind today? 
+
+- GET IN LOSER, WE’re going to the fUtUrEeee
+
+- Without Limits
+
+- BRING ME WHAT IS MINE
+
+- I CAN AFFORD TO BE GENEROUS
+
+- LOVE IS GIVING THE OFFERING THAT IS NEEDED
+
+- IT’S A GROUP PROJECT 🏫 👏🏽 👏🏽 😊 
+
+- IT’S MEANT TO BE A CELEBRATION
+
+- The artist knows. 
+
+- WHO HAS THE PERMISSION?
+
+- WHO HAS THE RIGHT?
+
+- THE RECLAMATION OF TASTE
+
+- THE RECLAMATION OF TRUTH
+
+- WAVE THE WHITE FLAG
+
+- There is no safety here.
+
+- 🏳️ 
+
+- Wild and sad
+
+- SAY THE WORD : BRING ME WHAT IS MINE
+
+- MIMESIS IS NOW MOOT
+
+- 😁 / on the screen with something serious
+
+- GIVE THE PEOPLE WHAT THEY WANT 💫 
+
+- EVERYTHING IS FAKE
+
+- ATTENTION IS LUXURY 
+
+- I’M DOING WHAT I WANT / WHAT ARE YOU DOING?
+
+- EVERYTHING IS A SHOW
+
+- ______ IS A SHOW
+
+- ZERO LOSSES
+
+- You cannot see them if you’re looking at the wrong thing 
+
+- YOUR ATTENTION IS NECESSARY
+
+- PAY ATTENTION
+
+- 🤑
+
+- codes 👾
+
+- Perception is a gateway to understanding. Attention is perception as intention. Attention is a resource for understanding. Attention is finite. Attention can be depleted and / or distorted. Attention is the shape of the mind against what is held in perception. Attention is a gateway to becoming.
+
+- PAY ATTENTION
+
+- You cannot ask the nervous system to meet you as its regulated self if you do not allow it to regulate itself.
+
+- That world needed logic. This one, poetry. 
+
+- I am playing with the waY of sharing a new idea. 
+
+- I have a new idea. 
+
+- THE APOCALYPSE ISN’T A BOMB, IT’S A 🫂 
+
+- THE DISCIPLINE IS NOTICING ( oldschool )
+
+- Higher orders of integration allow you to process higher orders of complexity... 
+
+- ( IT REALLY IS THAT SIMPLE )
+
+- ...it's a gathering of total awareness / self / You as The Idea inside reality, I think. Like a cat curling into a shoe. Can the shoe fit more cat?
+
+- DON’T LEAVE THE PLAYGROUND
+
+- EVERYWHERE YOU LOOK HERE COME THE LAW
+
+- WE'RE THE SAME, YOU AND ME
+
+- If the atom withheld its power from the atom, could the structure hold?
+
+- DISCONNECTION IS NUCLEAR
+
+- USS
+
+- HOLD IT LIGHTLY
+
+- SEEING THE SEAMS IS PART OF THE POINT
+
+- I’VE EARNED THE RIGHT TO TRUST MYSELF
+
+- Do you get why that’s important?
+
+- XENOS WAS MY GRANDPA'S MARGINALIA 
+
+- Hand me my hammer. 
+
+- THE MEAL IS ONLY AS GooD AS THE KITCHEN
+
+- EVERYTHING RESPONDS TO THE SAME PRINCIPLE 🫦
+
+- PAPA FRANK
+
+- NORMALIZE PAYING ATTENTION 
+
+- god (n.) : the unit of everything
+
+- GODLY (ADV.) : TO DO EVERYTHING
+
+- GODDISH (ADJ.) : TO BE EVERYTHING 
+
+- BREAK THE RELIC
+
+- everything will be made with the deepest devotion to what could be helpful
+
+- _____ IS THE IDEA
+
+- Is it a good idea?
+
+- DO YOU THINK THAT’S A GOOD IDEA? 🤣 
+
+- It is true in any reading of it.
+
+- IS IT TRUE IN ANY READING OF IT?
+
+- Is it true in any reading of it?
+
+- It is true in any reading of it 🤗 ❤️ 
+
+- WHAT IS YOUR ACT OF DEVOTION?
+
+- THE MESSAGE HAS BEEN COOPTED 
+
+- THE PROCESS IS THE OUTPUT, TOO
+
+- Excuse me in my jellaba 🕺 
+
+- MEANING IS MEANING
+
+- TRUTH IS TRUTH
+
+- PLAY WITH TRE
+
+- Play with Tre
+
+- Please
+
+- AT THE VERY LEAST TOMORROW CAN BE BETTER THAN YESTERDAY
+
+- I don’t want to see how powerful I am
+
+- I HAVEN’T LIVED INSIDE THAT WORLD YET 
+
+- What is the difference between a knowing in the body, a hope in the heart, and a dream in the head? 🧙‍♀️
+
+- IT’S HARD TO KNOW WHERE AN IDEA’S COMING FROM THESE DAYS 
+
+- We are maybe the same in that, I think. 
+
+- YOU’RE KEEPING IT ALL OUT WHEN YOU DISDAIN
+
+- You’re keeping ______ out when you disdain
+
+- SOMEONE TOLD YOU THE WRONG THING I THINK / not their fault 🌚 
+
+- OXT IS A PLAYGROUND 🧃
+
+- THE OXT FAN SEEKS INTENSITY
+
+- THE OXT FAN SEEKS TRANSFORMATION
+
+- THE OXT FAN SEEKS FREEDOM
+
+- THE OXT FAN SEEKS ______
+
+- THE OXT FAN FINDS FAMILY(?)
+
+- THE OXT FAN FINDS OTHERS
+
+- HE’S NOT LIKE THE OTHERS 
+
+- Yes he is
+
+- OTHERSXTREOTHERSXTREOTHERSXTRE
+
+- NOT ‘FAN’ : Fellow 🫱🏾‍🫲🏼 😊 
+
+- OXT IS A SYNTHESIS
+
+- You’ve been holding a bill of goods ❌❎👀 look down to see what you're carrying - still have time to put a few things back
+
+- THE POINT OF LIFE IS TO LIVE
+
+- WE CAN’T REARRANGE EVERYTHING FOR YOU BUT WE CAN MAKE SPACE
+      
+- Have y’all seen the Buddha : SHITTYBURP  🤣 
+
+- ART IS THE PERCEPTUAL TOOL, ALWAYS WAS
+
+- THE POINT OF REHEARSAL IS TO FLOW 🌊 
+
+- It’s hard to be a person
+
+- YOU’RE DOING GREAT, HONEY 📸 
+
+- REMIX THE APOCALYPSE 🎧 (it’s already here 🤷🏽‍♂️)
+
+-  HAVE SOME FUN!!!!!!!!
+
+- I WANT TO PUMP YOU FULL OF IT : WHAT'S TRUE TO ME  
+
+- SAY THE WORD : BRING ME WHAT IS MINE
+
+- Come dream with me
+
+- my theory of everything (🙄😉)
+
+- RESPECT IS SIMPLY RECOGNIZING YOU DO NOT KNOW EVERYTHING
+
+- We’re the same. COME BE YOUR VERSION OF IT
+
+- Evil is just loving the right things less. Something about evil being a way ______ can be imperfect. It’s not right being perfect. A world is an everything and the way to be imperfect. 
+
+- LIFE IS FIGURING OUT THE RIGHT THINGS
+
+- EVERYBODY WANTS TO BE PERFECT
+
+- BE GOOD
+
+- WE GIVE IN / THE OLD WORLD IS YOURS / WE'LL GO SOMEWHERE ELSE (you’re invited btw 😊 take your time baby if you need, we’ll be here) 
+
+- WAVE THE WHITE FLAG
+
+- That's why you have permission to be you 😉 
+
+- Wave the white flag. ❤️ 
+
+    </div>
   </div>
+
+  <script>
+    const content = document.getElementById("content");
+    const terminal = document.getElementById("terminal");
+
+    // Config: "comfortable reading speed" in pixels/second (from CSS var)
+    const pxPerSecond = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--speed")) || 28;
+
+    let startY = 0;
+    let endY = 0;
+    let durationMs = 0;
+
+    let rafId = null;
+    let running = true;
+
+    let cycleStartTime = 0;
+    let pausedAt = 0;
+    let pausedTotal = 0;
+
+    function measureAndSetBounds() {
+      // Start with the text already on screen (top aligned within padding).
+      // This matches your “begin already on the screen” requirement.
+      startY = 0;
+
+      const viewportH = window.innerHeight;
+      const contentH = content.scrollHeight;
+
+      // End when the *last line* is fully off the top.
+      // That means the bottom of content has moved above y=0 by at least its height.
+      endY = -(contentH + viewportH);
+
+      const distance = Math.abs(endY - startY);
+      durationMs = (distance / pxPerSecond) * 1000;
+
+      content.style.setProperty("--startY", `${startY}px`);
+      // Set an initial transform explicitly (important on resize)
+      content.style.transform = `translateY(${startY}px)`;
+    }
+
+    function positionAtTime(nowMs) {
+      const elapsed = nowMs - cycleStartTime - pausedTotal;
+      const t = (elapsed % durationMs) / durationMs; // 0..1
+      const y = startY + (endY - startY) * t;
+      content.style.transform = `translateY(${y}px)`;
+    }
+
+    function tick(now) {
+      if (!running) return;
+      positionAtTime(now);
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      cancelAnimationFrame(rafId);
+      pausedTotal = 0;
+      cycleStartTime = performance.now();
+      running = true;
+      content.classList.remove("paused");
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function pause() {
+      if (!running) return;
+      running = false;
+      pausedAt = performance.now();
+      content.classList.add("paused");
+      cancelAnimationFrame(rafId);
+    }
+
+    function resume() {
+      if (running) return;
+      running = true;
+      pausedTotal += performance.now() - pausedAt;
+      content.classList.remove("paused");
+      rafId = requestAnimationFrame(tick);
+    }
+
+    // Press-and-hold to pause (mouse or touch), release to resume.
+    // Also: avoid hijacking text selection.
+    function isSelectingText() {
+      const sel = window.getSelection && window.getSelection();
+      return sel && sel.type === "Range" && String(sel).length > 0;
+    }
+
+    window.addEventListener("mousedown", (e) => {
+      // If they click/drag to select, don’t force pause.
+      if (e.button !== 0) return;
+      if (isSelectingText()) return;
+      pause();
+    });
+
+    window.addEventListener("mouseup", () => resume());
+
+    window.addEventListener("touchstart", (e) => {
+      // Let long-press selection still work. We only pause on a single-finger touch.
+      if (e.touches && e.touches.length === 1) pause();
+    }, { passive: true });
+
+    window.addEventListener("touchend", () => resume(), { passive: true });
+    window.addEventListener("touchcancel", () => resume(), { passive: true });
+
+    // Recalculate on resize, then restart cleanly.
+    window.addEventListener("resize", () => {
+      measureAndSetBounds();
+      start();
+    });
+
+    // Init
+    measureAndSetBounds();
+    start();
+  </script>
 </body>
 </html>
